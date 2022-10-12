@@ -50,9 +50,14 @@
                 <div class="form-group row">
                     <label for="Nama_Jabatan" class="col-sm-2 col-form-label">Jabatan</label>
                     <div class="col-sm-10">
+                        <select id="jabatan_id" name="Nama_Jabatan" class="form-control">
                             @foreach ($karyawan as $k)
-                                <input type="text" name="Nama_Jabatan" readonly class="form-control-plaintext" id="Nama_Jabatan" value="{{$k->jabatan_id}}">{{$k->Nama_Jabatan}}
+                                <option value="{{$k->karyawan_id}}">{{$k->Nama_Jabatan}}</option>
                             @endforeach
+                        </select>
+                            {{-- @foreach ($karyawan as $k)
+                                <input type="text" name="Nama_Jabatan" readonly class="form-control-plaintext" id="jabatan_id" value="{{$k->karyawan_id}}">{{$k->Nama_Jabatan}}
+                            @endforeach --}}
                     </div>
                 </div>
 <!-- bagian Jam_Mulai -->

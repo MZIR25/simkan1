@@ -45,6 +45,7 @@ class JobdeskController extends Controller
         // dd($request);
         $this->validate($request, [
             'karyawan_id'=> 'required',
+            'jabatan_id'=> 'required',
             'Jam_Mulai'=> 'required',
             'Jam_Selesai'=> 'required',
             'Tugas_Karyawan'=> 'required',
@@ -52,6 +53,7 @@ class JobdeskController extends Controller
         $jobdesk=new Jobdesk;
 
         $jobdesk->karyawan_id=$request->get('karyawan_id');
+        $jobdesk->jabatan_id=$request->get('jabatan_id');
 
         $jobdesk->Jam_Mulai=$request->get('Jam_Mulai');
         $jobdesk->Jam_Selesai=$request->get('Jam_Selesai');
