@@ -15,7 +15,7 @@ class CreateDevisiTable extends Migration
     {
         Schema::create('devisi', function (Blueprint $table) {
             $table->increments('devisi_id');
-            $table->string('Devisi')->nullable();
+            $table->string('Nama_Devisi')->nullable();
             $table->timestamps();
         });
     }

@@ -15,8 +15,8 @@ class CreateDaftarGajiTable extends Migration
     {
         Schema::create('daftar_gaji', function (Blueprint $table) {
             $table->increments('gaji_id');
-            $table->string('Nama_Karyawan')->nullable();
-            $table->string('Jabatan')->nullable();
+            $table->integer('karyawan_id')->unsigned();
+            $table->foreign('karyawan_id')->references('karyawan_id')->on('karyawan')->onDelete('cascade');
             $table->string('Gaji_Pokok')->nullable();
             $table->string('Status_Menikah')->nullable();
             $table->string('Pajak_Bpjs')->nullable();

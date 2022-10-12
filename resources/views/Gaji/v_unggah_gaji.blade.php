@@ -27,18 +27,30 @@
                 <div class="form-group row">
                     <label for="Nama_Karyawan" class="col-sm-2 col-form-label">Nama Karyawan</label>
                     <div class="col-sm-10">
-                         <input type="text" id="Nama_Karyawan" name="Nama_Karyawan" class="form-control" placeholder="Masukkan Nama">
-                            <x-validate-error-message name="Nama_Karyawan"/>
+                        <select id="karyawan_id" name="karyawan_id" class="form-control">
+                            @foreach ($karyawan as $k)
+                                <option value="{{$k->karyawan_id}}">{{$k->Nama_Karyawan}}</option>
+                            @endforeach
+                        </select>
                     </div>
+                    <x-validate-error-message name="karyawan_id"/>
                 </div>
 <!-- bagian Jabatan -->
-                <div class="form-group row">
-                    <label for="Jabatan" class="col-sm-2 col-form-label">Jabatan</label>
+                {{-- <div class="form-group row">
+                    <label for="Nama_Jabatan" class="col-sm-2 col-form-label">Jabatan</label>
                     <div class="col-sm-10">
-                        <input type="text"  id="Jabatan" name="Jabatan" class="form-control" placeholder="Masukkan Jabatan">
-                            <x-validate-error-message name="Jabatan"/>
+                        <select id="karyawan_id" name="Nama_Jabatan" class="form-control">
+
+                             
+                            @foreach ($karyawan as $k)
+                                <option value="{{$k->karyawan_id}}">{{$k->Jabatan->Nama_Jabatan}}</option>
+                                
+                            @endforeach
+                            
+                        </select>
                     </div>
-                </div>
+                    <x-validate-error-message name="Jabatan"/>
+                </div> --}}
 <!-- bagian Alasan Cuti -->
                 <div class="form-group row">
                     <label for="Gaji_Pokok" class="col-sm-2 col-form-label">Gaji Pokok</label>

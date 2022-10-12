@@ -4,10 +4,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>SIMKAN ValTech</title>
 
   <script src="{{ mix('js/app.js') }}"></script>
-  <link rel="stylesheet" href="{{ mix('css/app.css') }}">   
+  <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -33,11 +33,12 @@
   {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.12.1/af-2.4.0/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/cr-1.5.6/date-1.1.2/fc-4.1.0/fh-3.2.4/kt-2.7.0/r-2.3.0/rg-1.2.0/rr-1.2.8/sc-2.0.7/sb-1.3.4/sp-2.0.2/sl-1.4.0/sr-1.1.1/datatables.min.css"/> --}}
   {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"> --}}
   {{-- <link rel="stylesheet" href="{{asset('template/')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="{{asset('template/')}}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="{{asset('template/')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css"> --}}
+  <link rel="stylesheet" href="{{asset('template/')}}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css"> --}}
+  {{-- <link rel="stylesheet" href="{{asset('template/')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css"> --}}
   <link rel="stylesheet" href="{{asset('template/')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="{{asset('template/')}}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="{{asset('template/')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -47,18 +48,24 @@
 
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: #3b849b;">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" style="color: #eef2f4;"></i></a>
       </li>
     </ul>
+
+    <!--navbar header -->
+    <nav class="navbar navbar" >
+        <h3 class="fluid text mb-0 " style="color: #eef2f4;">SIM KARYAWAN</h3>
+    </nav>
+
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
     <!-- Authentication Links -->
       <li class="nav-item dropdown">
-        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color: #eef2f4;">
             {{ Auth::user()->name }}
         </a>
 
@@ -71,8 +78,7 @@
 
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
               @csrf
-            </form>
-                <input type="hidden" name="_token" value="Nxk1vetEvrSDhSjSKo5dMdphGKPHk5IW3axJqo1d">                                    </form>
+            <input type="hidden" name="_token" value="Nxk1vetEvrSDhSjSKo5dMdphGKPHk5IW3axJqo1d">                                    </form>
         </div>
       </li>
     </ul>
@@ -80,12 +86,15 @@
   <!-- /.navbar -->
 
     @include('layouts.v_sidebar')
- 
+
   <!-- Main Sidebar Container -->
   <div class="content-wrapper">
   <!-- Content Wrapper. Contains page content -->
     <section class="content">
-      @yield('content')
+        <div class="container-lg">
+
+        @yield('content')
+        </div>
     </section>
   </div>
   {{-- <div class="content-wrapper"> --}}
@@ -108,20 +117,20 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    
-    
+
+
     <!-- /.content -->
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
+  {{-- <footer class="main-footer">
     <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.1.0
     </div>
-  </footer>
+  </footer> --}}
 
   <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
+  <aside class="control-sidebar control-sidebar-light-maroon">
     <!-- Control sidebar content goes here -->
   </aside>
   <!-- /.control-sidebar -->
@@ -137,7 +146,7 @@
   $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
-<script src="{{asset('template/')}}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{{asset('template/')}}/plugins/bootstrap-4.0.0/dist/js.bundle.min.js"></script>
 <!-- ChartJS -->
 <script src="{{asset('template/')}}/plugins/chart.js/Chart.min.js"></script>
 <!-- Sparkline -->
@@ -183,7 +192,7 @@
             "responsive": true,
             "lengthChange": false,
             "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            "buttons": ["excel"]
         }).buttons().container().appendTo('#myTable_wrapper .col-md-6:eq(0)');
         // $('#example2').DataTable({
         //     "paging": true,

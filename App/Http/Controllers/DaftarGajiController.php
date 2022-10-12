@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\GajiExport;
 use App\Gaji;
+use App\Karyawan;
+use App\Jabatan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 
 class DaftarGajiController extends Controller
@@ -19,6 +23,10 @@ class DaftarGajiController extends Controller
         $gaji = Gaji::all();
         return view('Gaji.v_daftar_gaji', compact('gaji'));
     }
+    public function export_excel()
+    {
+        return Excel::download(new GajiExport, 'Daftar Gaji.xlsx');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -27,7 +35,9 @@ class DaftarGajiController extends Controller
      */
     public function create()
     {
-        return view('Gaji.v_unggah_gaji');
+        $karyawan=Karyawan::get();
+
+        return view('Gaji.v_unggah_gaji', compact('karyawan'));
     }
 
     /**
@@ -39,8 +49,7 @@ class DaftarGajiController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'Nama_Karyawan'=> 'required',
-            'Jabatan'=> 'required',
+            'karyawan_id'=> 'required',
             'Gaji_Pokok'=> 'required',
             'Status_Menikah'=> 'required',
             'Pajak_Bpjs'=> 'required',
@@ -48,8 +57,7 @@ class DaftarGajiController extends Controller
         ]);
         $gaji=new Gaji;
 
-        $gaji->Nama_Karyawan=$request->get('Nama_Karyawan');
-        $gaji->Jabatan=$request->get('Jabatan');
+        $gaji->karyawan_id=$request->get('karyawan_id');
         $gaji->Gaji_Pokok=$request->get('Gaji_Pokok');
         $gaji->Status_Menikah=$request->get('Status_Menikah');
         $gaji->Pajak_Bpjs=$request->get('Pajak_Bpjs');
@@ -65,7 +73,7 @@ class DaftarGajiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($gaji_id)
     {
         //
     }
@@ -76,10 +84,11 @@ class DaftarGajiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($gaji_id)
     {
-        $gaji = Gaji::find($id);
-        return view('Gaji.v_edit_gaji', compact('gaji'));
+        $karyawan=Karyawan::all();
+        $gaji = Gaji::find($gaji_id);
+        return view('Gaji.v_edit_gaji', compact('gaji','karyawan'));
     }
 
     /**
@@ -89,20 +98,18 @@ class DaftarGajiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $gaji_id)
     {
         $this->validate($request, [
-            'Nama_Karyawan'=> 'required',
-            'Jabatan'=> 'required',
+            'karyawan_id'=> 'required',
             'Gaji_Pokok'=> 'required',
             'Status_Menikah'=> 'required',
             'Pajak_Bpjs'=> 'required',
             'Jumlah_Gaji'=> 'required'
         ]);
-        $gaji= Gaji::find($id);
+        $gaji= Gaji::find($gaji_id);
 
-        $gaji->Nama_Karyawan=$request->get('Nama_Karyawan');
-        $gaji->Jabatan=$request->get('Jabatan');
+        $gaji->karyawan_id=$request->get('karyawan_id');
         $gaji->Gaji_Pokok=$request->get('Gaji_Pokok');
         $gaji->Status_Menikah=$request->get('Status_Menikah');
         $gaji->Pajak_Bpjs=$request->get('Pajak_Bpjs');

@@ -22,39 +22,35 @@
                 @endforeach
             </ul>
             @endif
-            <form action="{{ url('update_jobdesk', $jobdesk->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('update_jobdesk', $jobdesk->jobdesk_id) }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 @method('PUT')
-                {{-- <div class="form-group">
-                    <label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">Nama Karyawan</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </select>
-                  </div> --}}
                 <div class="form-group row">
                     <label for="Nama_Karyawan" class="col-sm-2 col-form-label">Nama Karyawan</label>
                     <div class="col-sm-10">
-                         <input type="text" value="{{$jobdesk->Nama_Karyawan}}" id="Nama_Karyawan" name="Nama_Karyawan" class="form-control" placeholder="Masukkan Nama">
-                            <x-validate-error-message name="Nama_Karyawan"/>
+                        <select id="karyawan_id" name="karyawan_id" class="form-control">
+                            @foreach ($karyawan as $k)
+                                <option value="{{$k->karyawan_id}}">{{$k->Nama_Karyawan}}</option>
+                            @endforeach
+                        </select>
                     </div>
+                    <x-validate-error-message name="karyawan_id"/>
                 </div>
 <!-- bagian Jabatan -->
-                <div class="form-group row">
-                    <label for="Jabatan" class="col-sm-2 col-form-label">Jabatan</label>
+                {{-- <div class="form-group row">
+                    <label for="Nama_Jabatan" class="col-sm-2 col-form-label">Jabatan</label>
                     <div class="col-sm-10">
-                        <input type="text" value="{{$jobdesk->Jabatan}}" id="Jabatan" name="Jabatan" class="form-control" placeholder="Masukkan Jabatan">
-                            <x-validate-error-message name="Jabatan"/>
+                        @foreach ($karyawan as $k)
+                            <input type="text" name="Nama_Jabatan" readonly class="form-control-plaintext" id="Nama_Jabatan" value={{$k->Jabatan->Nama_Jabatan}}>
+                        @endforeach
                     </div>
-                </div>
+                    <x-validate-error-message name="Jabatan"/>
+                </div> --}}
 <!-- bagian Jam_Mulai -->
                 <div class="form-group row">
                     <label for="Jam_Mulai" class="col-sm-2 col-form-label">Jam Mulai</label>
                         <div class="col-sm-10">
-                            <input type="time" value="{{$jobdesk->Jam_Mulai}}" id="Jam_Mulai" name="Tanggal_Mulai" class="form-control"/>
+                            <input type="time" value="{{$jobdesk->Jam_Mulai}}" id="Jam_Mulai" name="Jam_Mulai" class="form-control"/>
                             <x-validate-error-message name="Jam_Mulai"/>
                         </div>
                 </div>
@@ -65,7 +61,7 @@
                             <x-validate-error-message name="Jam_Selesai"/>
                         </div>
                 </div>
-<!-- bagian Tugas_Karyawan --> 
+<!-- bagian Tugas_Karyawan -->
                 <div class="form-group row">
                     <label for="Tugas_Karyawan" class="col-sm-2 col-form-label">Tugas_Karyawan</label>
                     <div class="col-sm-10">
@@ -73,7 +69,6 @@
                             <x-validate-error-message name="Tugas_Karyawan"/>
                     </div>
                 </div>
-                
                 <div class="form-group row">
                     <div class="col-md-12 text-right">
                         <button type="submit" class="btn btn-success btn-lg">Submit</button>

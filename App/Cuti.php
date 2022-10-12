@@ -10,11 +10,14 @@ class Cuti extends Model
     protected $primaryKey = "cuti_id";
     protected $fillable = [
        'cuti_id',
-       'Nama_Karyawan',
-       'Jabatan',
        'Alasan_Cuti',
        'Tanggal_Mulai',
        'Tanggal_Selesai',
        'Alamat',
        'No_HP'];
+
+       public function Karyawan()
+       {
+           return $this->belongsTo('App\Karyawan','karyawan_id');
+       }
 }

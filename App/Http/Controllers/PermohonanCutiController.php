@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Cuti;
+use App\Karyawan;
+use App\Exports\CutiExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 
 
@@ -21,6 +24,10 @@ class PermohonanCutiController extends Controller
         return view('Cuti.v_permohonan_cuti', compact('cuti'));
     }
 
+    public function export_excel()
+    {
+        return Excel::download(new CutiExport, 'Daftar Cuti.xlsx');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -28,7 +35,8 @@ class PermohonanCutiController extends Controller
      */
     public function create()
     {
-        return view('Cuti.v_unggah_cuti');
+        $karyawan=Karyawan::get();
+        return view('Cuti.v_unggah_cuti', compact('karyawan'));
     }
 
     /**
@@ -41,24 +49,20 @@ class PermohonanCutiController extends Controller
     {
         // dd($request);
         $this->validate($request, [
-            'Nama_Karyawan'=> 'required',
-            'Jabatan'=> 'required',
+            'karyawan_id'=> 'required',
             'Alasan_Cuti'=> 'required',
             'Tanggal_Mulai'=> 'required',
             'Tanggal_Selesai'=> 'required',
-            'Alamat'=> 'required',
-            'No_HP'=> 'required'
+
+
         ]);
 
         $cuti=new Cuti;
 
-        $cuti->Nama_Karyawan=$request->get('Nama_Karyawan');
-        $cuti->Jabatan=$request->get('Jabatan');
+        $cuti->karyawan_id=$request->get('karyawan_id');
         $cuti->Alasan_Cuti=$request->get('Alasan_Cuti');
         $cuti->Tanggal_Mulai=$request->get('Tanggal_Mulai');
         $cuti->Tanggal_Selesai=$request->get('Tanggal_Selesai');
-        $cuti->Alamat=$request->get('Alamat');
-        $cuti->No_HP=$request->get('No_HP');
         $cuti->save();
 
         return redirect('permohonan_cuti');
@@ -70,7 +74,7 @@ class PermohonanCutiController extends Controller
      * @param  \App\PermohonanCuti  $permohonanCuti
      * @return \Illuminate\Http\Response
      */
-    public function show(PermohonanCuti $permohonanCuti)
+    public function show($permohonanCuti)
     {
         //
     }
@@ -81,10 +85,11 @@ class PermohonanCutiController extends Controller
      * @param  \App\PermohonanCuti  $permohonanCuti
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($cuti_id)
     {
-        $cuti = Cuti::find($id);
-        return view('Cuti.v_edit_cuti', compact('cuti'));
+        $karyawan=Karyawan::all();
+        $cuti = Cuti::find($cuti_id);
+        return view('Cuti.v_edit_cuti', compact('cuti','karyawan'));
     }
 
     /**
@@ -94,27 +99,25 @@ class PermohonanCutiController extends Controller
      * @param  \App\PermohonanCuti  $permohonanCuti
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $cuti_id)
     {
         $this->validate($request, [
-            'Nama_Karyawan'=> 'required',
-            'Jabatan'=> 'required',
+            'karyawan_id'=> 'required',
             'Alasan_Cuti'=> 'required',
             'Tanggal_Mulai'=> 'required',
             'Tanggal_Selesai'=> 'required',
-            'Alamat'=> 'required',
-            'No_HP'=> 'required'
+
+
         ]);
 
-        $cuti = Cuti::find($id);
+        $cuti = Cuti::find($cuti_id);
 
-        $cuti->Nama_Karyawan=$request->get('Nama_Karyawan');
-        $cuti->Jabatan=$request->get('Jabatan');
+        $cuti->karyawan_id=$request->get('karyawan_id');
         $cuti->Alasan_Cuti=$request->get('Alasan_Cuti');
         $cuti->Tanggal_Mulai=$request->get('Tanggal_Mulai');
         $cuti->Tanggal_Selesai=$request->get('Tanggal_Selesai');
-        $cuti->Alamat=$request->get('Alamat');
-        $cuti->No_HP=$request->get('No_HP');
+
+
         $cuti->save();
 
         return redirect('permohonan_cuti');

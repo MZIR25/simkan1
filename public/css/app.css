@@ -5263,6 +5263,7 @@ textarea.form-control {
 @media (prefers-reduced-motion: reduce) {
   .btn {
     transition: none;
+    margin: 0 auto;
   }
 }
 .btn:hover {
@@ -12304,3 +12305,4 @@ h3 {
     border-color: #dee2e6;
   }
 }
+

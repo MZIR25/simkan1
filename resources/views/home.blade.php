@@ -1,22 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
-            </div>
+<div class="container-fluid p-5 m-">
+    <div class="jumbotron ">
+        <div class="text-center">
+        <img src="{{asset('template/')}}/dist/img/logo_valtech.png"  alt="Valtech Logo" class="rounded w-25 mx-auto d-block "  >
+        <h1 class="display-4"><span class="font-weight-bold"> Sistem Informasi Manajemen Karyawan</span></h1>
+        <hr class="my-4">
+        <p class="font-weight-light h2">SIMKAN</p>
         </div>
     </div>
 </div>

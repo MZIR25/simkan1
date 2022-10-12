@@ -22,24 +22,28 @@
                 @endforeach
             </ul>
             @endif
-            <form action="{{ url('update_gaji', $gaji->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('update_gaji', $gaji->gaji_id) }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 @method('PUT')
                 <div class="form-group row">
                     <label for="Nama_Karyawan" class="col-sm-2 col-form-label">Nama Karyawan</label>
                     <div class="col-sm-10">
-                         <input type="text" value="{{$gaji->Nama_Karyawan}}" id="Nama_Karyawan" name="Nama_Karyawan" class="form-control" placeholder="Masukkan Nama">
-                            <x-validate-error-message name="Nama_Karyawan"/>
+                        <select id="karyawan_id" name="karyawan_id" class="form-control">
+                            @foreach ($karyawan as $k)
+                                <option value="{{$k->karyawan_id}}">{{$k->Nama_Karyawan}}</option>
+                            @endforeach
+                        </select>
                     </div>
+                    <x-validate-error-message name="karyawan_id"/>
                 </div>
 <!-- bagian Jabatan -->
-                <div class="form-group row">
+                {{-- <div class="form-group row">
                     <label for="Jabatan" class="col-sm-2 col-form-label">Jabatan</label>
                     <div class="col-sm-10">
                         <input type="text" value="{{$gaji->Jabatan}}" id="Jabatan" name="Jabatan" class="form-control" placeholder="Masukkan Jabatan">
                             <x-validate-error-message name="Jabatan"/>
                     </div>
-                </div>
+                </div> --}}
 <!-- bagian Alasan Cuti -->
                 <div class="form-group row">
                     <label for="Gaji_Pokok" class="col-sm-2 col-form-label">Alasan Cuti</label>
@@ -48,7 +52,7 @@
                             <x-validate-error-message name="Gaji_Pokok"/>
                     </div>
                 </div>
-                            
+
 
 <!-- bagian Status Nikah -->
                 <div class="form-group row">
@@ -65,7 +69,7 @@
                     </div>
                 </div>
                 <x-validate-error-message name="Status_Menikah"/>
-<!-- bagian Alamat --> 
+<!-- bagian Alamat -->
                 <div class="form-group row">
                     <label for="Pajak_Bpjs" class="col-sm-2 col-form-label">Pajak Bpjs</label>
                     <div class="col-sm-10">
@@ -73,7 +77,7 @@
                             <x-validate-error-message name="Pajak_Bpjs"/>
                     </div>
                 </div>
-<!-- bagian Alamat -->  
+<!-- bagian Alamat -->
                 <div class="form-group row">
                     <label for="Jumlah_Gaji" class="col-sm-2 col-form-label">Jumlah Gaji</label>
                     <div class="col-sm-10">

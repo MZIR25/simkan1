@@ -15,13 +15,12 @@ class CreatePermohonanCutiTable extends Migration
     {
         Schema::create('permohonan_cuti', function (Blueprint $table) {
             $table->increments('cuti_id');
-            $table->string('Nama_Karyawan')->nullable();
-            $table->string('Jabatan')->nullable();
+            $table->integer('karyawan_id')->unsigned();
+            $table->foreign('karyawan_id')->references('karyawan_id')->on('karyawan')->onDelete('cascade');
             $table->string('Alasan_Cuti')->nullable();
             $table->date('Tanggal_Mulai')->nullable();
             $table->date('Tanggal_Selesai')->nullable();
-            $table->string('Alamat')->nullable();
-            $table->Integer('No_HP')->nullable();
+
             $table->timestamps();
         });
     }

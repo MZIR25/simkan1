@@ -10,10 +10,14 @@ class Gaji extends Model
     protected $primaryKey = "gaji_id";
     protected $fillable = [
        'gaji_id',
-       'Nama_Karyawan',
-       'Jabatan',
        'Gaji_Pokok',
        'Status_Menikah',
        'Pajak_Bpjs',
        'Jumlah_Gaji'];
+
+       public function Karyawan()
+       {
+           return $this->belongsTo('App\Karyawan','karyawan_id');
+       }
 }
+

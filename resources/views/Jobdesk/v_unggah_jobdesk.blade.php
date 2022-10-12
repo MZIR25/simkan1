@@ -40,26 +40,15 @@
                   
 <!-- bagian Jabatan -->
                 {{-- <div class="form-group row">
-                    <label for="Jabatan" class="col-sm-2 col-form-label">Jabatan</label>
-                    <div class="col-sm-10">
-                        <input type="text"  id="Jabatan" name="Jabatan" class="form-control" value="{{$k->karyawan_id}}">{{$k->Jabatan}}
-                            <x-validate-error-message name="Jabatan"/>
-                    </div>
-                </div> --}}
-
-                <div class="form-group row">
                     <label for="Nama_Jabatan" class="col-sm-2 col-form-label">Jabatan</label>
                     <div class="col-sm-10">
-                        <select id="jabatan_id" name="Nama_Jabatan" class="form-control">
-                            @foreach ($karyawan as $k)
-                                <option value="{{$k->karyawan_id}}">{{$k->Nama_Jabatan}}</option>
-                            @endforeach
-                        </select>
-                            {{-- @foreach ($karyawan as $k)
-                                <input type="text" name="Nama_Jabatan" readonly class="form-control-plaintext" id="jabatan_id" value="{{$k->karyawan_id}}">{{$k->Nama_Jabatan}}
-                            @endforeach --}}
+                        @foreach ($karyawan as $k)
+                            <input type="text" name="Nama_Jabatan" readonly class="form-control" id="Nama_Jabatan" value={{$k->Jabatan->Nama_Jabatan}}>
+                        @endforeach
                     </div>
-                </div>
+                    <x-validate-error-message name="Jabatan"/>
+                </div> --}}
+
 <!-- bagian Jam_Mulai -->
                 <div class="form-group row">
                     <label for="Jam_Mulai" class="col-sm-2 col-form-label">Jam Mulai</label>

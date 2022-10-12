@@ -22,24 +22,28 @@
                 @endforeach
             </ul>
             @endif
-            <form action="{{ url('update_cuti', $cuti->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('update_cuti', $cuti->cuti_id) }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 @method('PUT')
                 <div class="form-group row">
                     <label for="Nama_Karyawan" class="col-sm-2 col-form-label">Nama Karyawan</label>
                     <div class="col-sm-10">
-                         <input type="text" value="{{$cuti->Nama_Karyawan}}" id="Nama_Karyawan" name="Nama_Karyawan" class="form-control" placeholder="Masukkan Nama">
-                            <x-validate-error-message name="Nama_Karyawan"/>
+                        <select id="karyawan_id" name="karyawan_id" class="form-control">
+                            @foreach ($karyawan as $k)
+                                <option value="{{$k->karyawan_id}}">{{$k->Nama_Karyawan}}</option>
+                            @endforeach
+                        </select>
                     </div>
+                    <x-validate-error-message name="karyawan_id"/>
                 </div>
 <!-- bagian Jabatan -->
-                <div class="form-group row">
+                {{-- <div class="form-group row">
                     <label for="Jabatan" class="col-sm-2 col-form-label">Jabatan</label>
                     <div class="col-sm-10">
                         <input type="text" value="{{$cuti->Jabatan}}" id="Jabatan" name="Jabatan" class="form-control" placeholder="Masukkan Jabatan">
                             <x-validate-error-message name="Jabatan"/>
                     </div>
-                </div>
+                </div> --}}
 <!-- bagian Alasan Cuti -->
                 <div class="form-group row">
                     <label for="Alasan_Cuti" class="col-sm-2 col-form-label">Alasan Cuti</label>
@@ -48,7 +52,7 @@
                             <x-validate-error-message name="Alasan_Cuti"/>
                     </div>
                 </div>
-                            
+
 
 <!-- bagian tanggal -->
                 <div class="form-group row">
@@ -65,22 +69,7 @@
                             <x-validate-error-message name="Tanggal_Selesai"/>
                         </div>
                 </div>
-<!-- bagian Alamat --> 
-                <div class="form-group row">
-                    <label for="Alamat" class="col-sm-2 col-form-label">Alamat</label>
-                    <div class="col-sm-10">
-                        <input type="text" value="{{$cuti->Alamat}}" id="Alamat" name="Alamat" class="form-control" placeholder="Masukkan Alamat">
-                            <x-validate-error-message name="Alamat"/>
-                    </div>
-                </div>
-<!-- bagian Alamat -->  
-                <div class="form-group row">
-                    <label for="No_HP" class="col-sm-2 col-form-label">Nomor HP</label>
-                    <div class="col-sm-10">
-                        <input type="text" value="{{$cuti->No_HP}}" id="No_HP" name="No_HP" class="form-control" placeholder="Masukkan Nomor HP">
-                            <x-validate-error-message name="No_HP"/>
-                    </div>
-                </div>
+
                 <div class="form-group row">
                     <div class="col-md-12 text-right">
                         <button type="submit" class="btn btn-success btn-lg">Submit</button>

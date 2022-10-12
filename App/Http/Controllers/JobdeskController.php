@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\JobdeskExport;
 use App\Jobdesk;
 use App\Karyawan;
 use App\Jabatan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 
 class JobdeskController extends Controller
@@ -21,6 +23,10 @@ class JobdeskController extends Controller
         $jobdesk = Jobdesk::all();
         return view('Jobdesk.v_daftar_jobdesk', compact('jobdesk'));
     }
+    public function export_excel()
+    {
+        return Excel::download(new JobdeskExport, 'Daftar Jobdesk.xlsx');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -30,7 +36,6 @@ class JobdeskController extends Controller
     public function create()
     {
         $karyawan=Karyawan::get();
-        $jabatan=Jabatan::get();
         return view('Jobdesk.v_unggah_jobdesk', compact('karyawan'));
     }
 
@@ -45,16 +50,13 @@ class JobdeskController extends Controller
         // dd($request);
         $this->validate($request, [
             'karyawan_id'=> 'required',
-            'jabatan_id'=> 'required',
             'Jam_Mulai'=> 'required',
             'Jam_Selesai'=> 'required',
-            'Tugas_Karyawan'=> 'required',
+            'Tugas_Karyawan'=> 'required'
         ]);
         $jobdesk=new Jobdesk;
 
         $jobdesk->karyawan_id=$request->get('karyawan_id');
-        $jobdesk->jabatan_id=$request->get('jabatan_id');
-
         $jobdesk->Jam_Mulai=$request->get('Jam_Mulai');
         $jobdesk->Jam_Selesai=$request->get('Jam_Selesai');
         $jobdesk->Tugas_Karyawan=$request->get('Tugas_Karyawan');
@@ -69,7 +71,7 @@ class JobdeskController extends Controller
      * @param  \App\Jobdesk  $jobdesk
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($jobdesk_id)
     {
         //
     }
@@ -80,10 +82,12 @@ class JobdeskController extends Controller
      * @param  \App\Jobdesk  $jobdesk
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($jobdesk_id)
     {
-        $jobdesk = Jobdesk::find($id);
-        return view('Jobdesk.v_edit_jobdesk', compact('jobdesk'));
+        $karyawan=Karyawan::all();
+        $jobdesk = Jobdesk::find($jobdesk_id);
+        // dd($jobdesk);
+        return view('Jobdesk.v_edit_jobdesk', compact('jobdesk','karyawan'));
     }
 
     /**
@@ -93,19 +97,17 @@ class JobdeskController extends Controller
      * @param  \App\Jobdesk  $jobdesk
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $jobdesk_id)
     {
         $this->validate($request, [
-            'Nama_Karyawan'=> 'required',
-            'Jabatan'=> 'required',
+            'karyawan_id'=> 'required',
             'Jam_Mulai'=> 'required',
             'Jam_Selesai'=> 'required',
             'Tugas_Karyawan'=> 'required',
         ]);
-        $jobdesk= Jobdesk::find($id);
+        $jobdesk= Jobdesk::find($jobdesk_id);
 
-        $jobdesk->Nama_Karyawan=$request->get('Nama_Karyawan');
-        $jobdesk->Jabatan=$request->get('Jabatan');
+        $jobdesk->karyawan_id=$request->get('karyawan_id');
         $jobdesk->Jam_Mulai=$request->get('Jam_Mulai');
         $jobdesk->Jam_Selesai=$request->get('Jam_Selesai');
         $jobdesk->Tugas_Karyawan=$request->get('Tugas_Karyawan');

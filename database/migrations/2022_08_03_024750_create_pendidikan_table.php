@@ -15,6 +15,8 @@ class CreatePendidikanTable extends Migration
     {
         Schema::create('pendidikan', function (Blueprint $table) {
         $table->increments('pendidikan_id');
+        // $table->integer('karyawan_id')->unsigned();
+        // $table->foreign('karyawan_id')->references('karyawan_id')->on('Karyawan')->onDelete('cascade');
         $table->string('Tingkat_Pendidikan')->nullable();
         $table->string('Tahun_Lulus')->nullable();
         $table->string('Nama_Sekolah')->nullable();

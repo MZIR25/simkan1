@@ -1,17 +1,15 @@
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-info-primary elevation-4">
-    <!-- Brand Logo -->    
+<aside class="main-sidebar sidebar-light-maroon elevation-4">
+    <!-- Brand Logo -->
     <img src="{{asset('template/')}}/dist/img/logo_valtech.png" alt="Valtech Logo" class="img-fluid" style="opacity: .8">
+    <hr class="my-2">
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-        <div class="fluid text-info h2 mt-3 mb-3 ml-3 d-flex">SIM KARYAWAN 	
-            
 
-        </div>
 
         <!-- Sidebar Menu -->
-        <nav class="mt-2">
+        <nav class="mt-3 mb-3">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
@@ -33,7 +31,7 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
+                <a href="/daftar_karyawan" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Daftar Karyawan</p>
                 </a>
@@ -53,7 +51,7 @@
                 Permohonan Cuti
                 </p>
             </a>
-            
+
             <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="nav-icon far fa-calendar-alt"></i>
@@ -84,13 +82,23 @@
                 Daftar Gaji
                 </p>
             </a>
+            </li>
             <li class="nav-item">
-                <a href="/daftar_jobdesk" class="nav-link">
+            <a href="/daftar_jobdesk" class="nav-link">
+                <i class="nav-icon fas fa-columns"></i>
+                <p>
+                Jobdesk
+                </p>
+            </a>
+            </li>
+            <li class="nav-item">
+                <a href="/manajemen_user" class="nav-link">
                     <i class="nav-icon fas fa-columns"></i>
                     <p>
-                    Jobdesk
+                    Manajemen User
                     </p>
                 </a>
+            </li>
         </ul>
         </nav>
         <!-- /.sidebar-menu -->
