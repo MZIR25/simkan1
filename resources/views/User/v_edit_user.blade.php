@@ -48,7 +48,14 @@
                             <x-validate-error-message name="level"/>
                     </div>
                 </div>
-
+<!-- bagian Id Karyawan -->
+                <div class="form-group row">
+                    <label for="karyawan_id" class="col-sm-2 col-form-label">ID User</label>
+                    <div class="col-sm-10">
+                        <input type="text" value="{{$users->karyawan_id}}"  id="karyawan_id" name="karyawan_id" class="form-control" placeholder="Masukkan ID User">
+                            <x-validate-error-message name="karyawan_id"/>
+                    </div>
+                </div>
 <!-- bagian Siuuuuuuuuu -->
                 <div class="form-group row">
                     <div class="col-md-12 text-right">

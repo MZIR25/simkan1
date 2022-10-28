@@ -1,5 +1,5 @@
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-light-maroon elevation-4">
+<aside class="main-sidebar sidebar-light-info elevation-4">
     <!-- Brand Logo -->
     <img src="{{asset('template/')}}/dist/img/logo_valtech.png" alt="Valtech Logo" class="img-fluid" style="opacity: .8">
     <hr class="my-2">
@@ -9,11 +9,13 @@
 
 
         <!-- Sidebar Menu -->
-        <nav class="mt-3 mb-3">
+        <nav class="mt-2 mb-3">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
-            <li class="nav-item">
+
+
+            <li class="nav-item ">
             <a href="{{ route('home') }}" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
@@ -26,7 +28,7 @@
                 <i class="nav-icon fas fa-copy"></i>
                 <p>
                 Karyawan
-                <i class="fas fa-angle-left right"></i>
+                <i class="right fas fa-angle-left"></i>
                 </p>
             </a>
             <ul class="nav nav-treeview">
@@ -37,7 +39,7 @@
                 </a>
                 </li>
                 <li class="nav-item">
-                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                <a href="/data_diri_karyawan" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Data Diri</p>
                 </a>
@@ -91,14 +93,25 @@
                 </p>
             </a>
             </li>
+            @if (auth()->user()->level == "admin")
+            <li class="nav-item">
+                <a href="/riwayat" class="nav-link">
+                    <i class="nav-icon fas fa-book"></i>
+                    <p>
+                    Riwayat
+                    </p>
+                </a>
+            </li>
             <li class="nav-item">
                 <a href="/manajemen_user" class="nav-link">
-                    <i class="nav-icon fas fa-columns"></i>
+                    <i class="nav-icon fa-solid fa-list-check"></i>
                     <p>
                     Manajemen User
                     </p>
                 </a>
             </li>
+            @endif
+
         </ul>
         </nav>
         <!-- /.sidebar-menu -->

@@ -55,7 +55,7 @@
 
 
 <!-- bagian Status Nikah -->
-                <div class="form-group row">
+                {{-- <div class="form-group row">
                     <label for="disabledSelect" class="col-sm-2 col-form-label">Status Menikah</label>
                     <div class="col-sm-10">
                     <select id="disabledSelect" name="Status_Menikah" class="form-control">
@@ -68,7 +68,7 @@
                     </select>
                     </div>
                 </div>
-                <x-validate-error-message name="Status_Menikah"/>
+                <x-validate-error-message name="Status_Menikah"/> --}}
 <!-- bagian Alamat -->
                 <div class="form-group row">
                     <label for="Pajak_Bpjs" class="col-sm-2 col-form-label">Pajak Bpjs</label>

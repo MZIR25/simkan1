@@ -25,6 +25,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.1.2",
         "@popperjs/core": "^2.11.6",
+        "admin-lte": "3.2",
         "datatables.net": "^1.12.1",
         "datatables.net-autofill": "^2.4.0",
         "datatables.net-autofill-dt": "^2.4.0",
@@ -44,7 +45,6 @@
         "datatables.net-searchpanes-dt": "^2.0.2",
         "datatables.net-select-dt": "^1.4.0",
         "datatables.net-staterestore-dt": "^1.1.1",
-        "font-awesome": "^4.7.0",
         "jszip": "^3.10.1",
         "pdfmake": "^0.2.5"
     }

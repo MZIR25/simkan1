@@ -5,7 +5,7 @@
     <div class="col-md-12 p-5 pt-2">
         <div class="card">
             <div class="card-body">
-                <h3><i class="fas fa-swatchbook"></i></i> DAFTAR KARYAWAN</h3><hr>
+                <h3><i class="fas fa-swatchbook"></i></i> DAFTAR USER</h3><hr>
 
                     <table id="myTable" class="table table-striped table-bordered" >
                     <thead >
@@ -14,6 +14,7 @@
                         <th scope="col">Nama User</th>
                         <th scope="col">Nama Email</th>
                         <th scope="col">Level</th>
+                        <th scope="col">Id Karyawan </th>
                         <th colspan="col">Aksi</th>
                         </tr>
 
@@ -25,7 +26,7 @@
                             <td>{{ $u->name}}</td>
                             <td>{{ $u->email}}</td>
                             <td>{{ $u->level}}</td>
-
+                            <td>{{ $u->karyawan_id}}</td>
                             <td>
                                 <div class="d-inline">
                                     <a href="/edit_user/{{$u->id}}"><i class="fas fa-edit bg-warning p-2 text-white rounded d-inline" data-toggle="tooltip" title="Edit"></a></i>

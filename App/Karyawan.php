@@ -43,6 +43,11 @@ class Karyawan extends Model
     {
         return $this->belongsTo('App\Devisi','devisi_id');
     }
+
+    public function Riwayats()
+    {
+        return $this->belongsTo('App\Riwayat','karyawan_id');
+    }
     public function User()
     {
         return $this->hasOne('App\User');

@@ -9,9 +9,10 @@
   <script src="{{ mix('js/app.js') }}"></script>
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   <!-- Google Font: Source Sans Pro -->
+
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-
+  {{-- <link rel="stylesheet" href="{{asset('fontawesome-free/')}}/css/all.min.css"> --}}
   <link rel="stylesheet" href="{{asset('template/')}}/plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -22,6 +23,7 @@
   <!-- JQVMap -->
   <link rel="stylesheet" href="{{asset('template/')}}/plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
+  {{-- <link rel="stylesheet" href="{{asset('dist/')}}/css/adminlte.min.css"> --}}
   <link rel="stylesheet" href="{{asset('template/')}}/dist/css/adminlte.min.css">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="{{asset('template/')}}/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
@@ -58,19 +60,39 @@
 
     <!--navbar header -->
     <nav class="navbar navbar" >
-        <h3 class="fluid text mb-0 " style="color: #eef2f4;">SIM KARYAWAN</h3>
+        <h3 class="fluid text mb-0 " style="color: #ffffff;">SIM KARYAWAN</h3>
     </nav>
+
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+        {{-- <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+              <i class="far fa-bell" style="color: #ffffff;"></i>
+              <span class="badge badge-warning navbar-badge">15</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+              <span class="dropdown-item dropdown-header">15 Notifications</span>
+              <div class="dropdown-divider"></div>
+              {{-- @foreach ($notif as $n) --}}
+                {{-- <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-file mr-2"></i> 3 new reports
+                    <span class="float-right text-muted text-sm">2 days</span>
+                </a>
+                {{-- @endforeach --}}
+              {{-- <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+            </div>
+          </li> --}}
     <!-- Authentication Links -->
       <li class="nav-item dropdown">
         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color: #eef2f4;">
-            {{ Auth::user()->name }}
+            {{ Auth::user()->level }}.{{ Auth::user()->name }}
         </a>
 
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="http://127.0.0.1:8000/logout"
+            <a class="dropdown-item" href="{{ route('logout') }}"
               onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
                 Logout
@@ -78,7 +100,7 @@
 
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
               @csrf
-            <input type="hidden" name="_token" value="Nxk1vetEvrSDhSjSKo5dMdphGKPHk5IW3axJqo1d">                                    </form>
+            </form>
         </div>
       </li>
     </ul>
@@ -91,10 +113,10 @@
   <div class="content-wrapper">
   <!-- Content Wrapper. Contains page content -->
     <section class="content">
-        <div class="container-lg">
+
 
         @yield('content')
-        </div>
+
     </section>
   </div>
   {{-- <div class="content-wrapper"> --}}
@@ -136,7 +158,7 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-
+{{-- <script src="{{asset('dist/')}}/js/adminlte.min.js"></script> --}}
 <!-- jQuery -->
 <script src="{{asset('template/')}}/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -146,7 +168,7 @@
   $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
-<script src="{{asset('template/')}}/plugins/bootstrap-4.0.0/dist/js.bundle.min.js"></script>
+<script src="{{asset('template/')}}/plugins/bootstrap/dist/js.bundle.min.js"></script>
 <!-- ChartJS -->
 <script src="{{asset('template/')}}/plugins/chart.js/Chart.min.js"></script>
 <!-- Sparkline -->
@@ -185,14 +207,20 @@
 <script src="{{asset('template/')}}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="{{asset('template/')}}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
-
+{{-- @if (auth()->user()->level == "karyawan")
 <script>
    $(function () {
     $("#myTable").DataTable({
             "responsive": true,
-            "lengthChange": false,
+            "lengthChange": true,
             "autoWidth": false,
-            "buttons": ["excel"]
+            "columnDefs": [
+            {
+                target: 14,
+                visible: false,
+                searchable: false,
+            }
+        ]
         }).buttons().container().appendTo('#myTable_wrapper .col-md-6:eq(0)');
         // $('#example2').DataTable({
         //     "paging": true,
@@ -205,5 +233,6 @@
         //   });
     });
 </script>
+@endif --}}
 </body>
 </html>

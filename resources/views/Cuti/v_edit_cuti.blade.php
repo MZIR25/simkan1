@@ -52,7 +52,17 @@
                             <x-validate-error-message name="Alasan_Cuti"/>
                     </div>
                 </div>
-
+<!-- bagian Status -->
+                <div class="form-group row">
+                    <label for="Status" class="col-sm-2 col-form-label">Status</label>
+                    <div class="col-sm-10">
+                        <select value="{{$cuti->Status}}" id="Status" name="Status" class="form-control">
+                            <option>Accept</option>
+                            <option>Denied</option>
+                        </select>
+                        <x-validate-error-message name="Status"/>
+                    </div>
+                </div>
 
 <!-- bagian tanggal -->
                 <div class="form-group row">

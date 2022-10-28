@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Riwayat;
+use Illuminate\Support\Facades\Auth;
 
 class KaryawanController extends Controller
 {
@@ -65,6 +67,12 @@ class KaryawanController extends Controller
             'Jumlah_Anak'=> 'required',
             'No_Hp'=> 'required',
             'Mulai_Kerja'=> 'required'
+        ]);
+        Riwayat::create([
+            'id' => Auth::user()->id,
+            'nama' => Auth::user()->name,
+            'level' => Auth::user()->level,
+            'aktivitas' => 'Menambah Data Karyawan  '.$request->name.''
         ]);
         DB::transaction(function()use ($request) {
             $pendidikan = Pendidikan::create([
@@ -147,6 +155,12 @@ class KaryawanController extends Controller
             'No_Hp'=> 'required',
             'Mulai_Kerja'=> 'required'
         ]);
+        Riwayat::create([
+            'id' => Auth::user()->id,
+            'nama' => Auth::user()->name,
+            'level' => Auth::user()->level,
+            'aktivitas' => 'Mengubah Data Karyawan  '.$request->name.''
+        ]);
 
         DB::transaction(function () use($request, $karyawan){
             $pendidikan = Pendidikan::find($karyawan->pendidikan_id);
@@ -186,6 +200,12 @@ class KaryawanController extends Controller
     {
         $karyawan = Karyawan::with('Pendidikan')->get()->find($karyawan_id);
         $karyawan->delete();
+        Riwayat::create([
+            'id' => Auth::user()->id,
+            'nama' => Auth::user()->name,
+            'level' => Auth::user()->level,
+            'aktivitas' => 'Menghapus Data Karyawan  '.$karyawan->name.''
+        ]);
         return redirect('daftar_karyawan');
     }
 }

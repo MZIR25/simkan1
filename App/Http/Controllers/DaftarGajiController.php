@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\Exports\GajiExport;
 use App\Gaji;
 use App\Karyawan;
-use App\Jabatan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\DB;
+use App\Riwayat;
+use Illuminate\Support\Facades\Auth;
 
 class DaftarGajiController extends Controller
 {
@@ -51,15 +51,19 @@ class DaftarGajiController extends Controller
         $this->validate($request, [
             'karyawan_id'=> 'required',
             'Gaji_Pokok'=> 'required',
-            'Status_Menikah'=> 'required',
             'Pajak_Bpjs'=> 'required',
             'Jumlah_Gaji'=> 'required'
+        ]);
+        Riwayat::create([
+            'id' => Auth::user()->id,
+            'nama' => Auth::user()->name,
+            'level' => Auth::user()->level,
+            'aktivitas' => 'Menambah Data Gaji Karyawan  '.$request->name.''
         ]);
         $gaji=new Gaji;
 
         $gaji->karyawan_id=$request->get('karyawan_id');
         $gaji->Gaji_Pokok=$request->get('Gaji_Pokok');
-        $gaji->Status_Menikah=$request->get('Status_Menikah');
         $gaji->Pajak_Bpjs=$request->get('Pajak_Bpjs');
         $gaji->Jumlah_Gaji=$request->get('Jumlah_Gaji');
         $gaji->save();
@@ -103,15 +107,20 @@ class DaftarGajiController extends Controller
         $this->validate($request, [
             'karyawan_id'=> 'required',
             'Gaji_Pokok'=> 'required',
-            'Status_Menikah'=> 'required',
+
             'Pajak_Bpjs'=> 'required',
             'Jumlah_Gaji'=> 'required'
+        ]);
+        Riwayat::create([
+            'id' => Auth::user()->id,
+            'nama' => Auth::user()->name,
+            'level' => Auth::user()->level,
+            'aktivitas' => 'Mengubah Data Gaji Karyawan  '.$request->name.''
         ]);
         $gaji= Gaji::find($gaji_id);
 
         $gaji->karyawan_id=$request->get('karyawan_id');
         $gaji->Gaji_Pokok=$request->get('Gaji_Pokok');
-        $gaji->Status_Menikah=$request->get('Status_Menikah');
         $gaji->Pajak_Bpjs=$request->get('Pajak_Bpjs');
         $gaji->Jumlah_Gaji=$request->get('Jumlah_Gaji');
         $gaji->save();
@@ -129,6 +138,12 @@ class DaftarGajiController extends Controller
     {
         $gaji = Gaji::find($gaji);
         $gaji->delete();
+        Riwayat::create([
+            'id' => Auth::user()->id,
+            'nama' => Auth::user()->name,
+            'level' => Auth::user()->level,
+            'aktivitas' => 'Menambah Data Karyawan  '.$gaji->name.''
+        ]);
         return redirect('daftar_gaji');
     }
 }

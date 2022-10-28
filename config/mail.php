@@ -133,4 +133,11 @@ return [
 
     'log_channel' => env('MAIL_LOG_CHANNEL'),
 
+    'stream' => [
+        'ssl' => [
+            'allow self signed' => true,
+            'verify peer' => false,
+            'verify peer name' => false,
+        ],
+    ],
 ];

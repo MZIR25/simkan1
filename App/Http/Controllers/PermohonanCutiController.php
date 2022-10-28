@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Riwayat;
 use App\Cuti;
 use App\Karyawan;
 use App\Exports\CutiExport;
@@ -9,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class PermohonanCutiController extends Controller
@@ -20,6 +23,7 @@ class PermohonanCutiController extends Controller
      */
     public function index()
     {
+
         $cuti = Cuti::all();
         return view('Cuti.v_permohonan_cuti', compact('cuti'));
     }
@@ -56,11 +60,19 @@ class PermohonanCutiController extends Controller
 
 
         ]);
+        Riwayat::create([
+            'id' => Auth::user()->id,
+            'nama' => Auth::user()->name,
+            'level' => Auth::user()->level,
+            'aktivitas' => 'Mengajukan Permohonan Cuti  '.$request->name.''
+        ]);
+
 
         $cuti=new Cuti;
 
         $cuti->karyawan_id=$request->get('karyawan_id');
         $cuti->Alasan_Cuti=$request->get('Alasan_Cuti');
+        $cuti->Status=$request->get('Status');
         $cuti->Tanggal_Mulai=$request->get('Tanggal_Mulai');
         $cuti->Tanggal_Selesai=$request->get('Tanggal_Selesai');
         $cuti->save();
@@ -104,16 +116,23 @@ class PermohonanCutiController extends Controller
         $this->validate($request, [
             'karyawan_id'=> 'required',
             'Alasan_Cuti'=> 'required',
+
             'Tanggal_Mulai'=> 'required',
             'Tanggal_Selesai'=> 'required',
 
 
         ]);
-
+        Riwayat::create([
+            'id' => Auth::user()->id,
+            'nama' => Auth::user()->name,
+            'level' => Auth::user()->level,
+            'aktivitas' => 'Mengubah Permohonan Cuti  '.$request->name.''
+        ]);
         $cuti = Cuti::find($cuti_id);
 
         $cuti->karyawan_id=$request->get('karyawan_id');
         $cuti->Alasan_Cuti=$request->get('Alasan_Cuti');
+        $cuti->Status=$request->get('Status');
         $cuti->Tanggal_Mulai=$request->get('Tanggal_Mulai');
         $cuti->Tanggal_Selesai=$request->get('Tanggal_Selesai');
 
@@ -129,10 +148,17 @@ class PermohonanCutiController extends Controller
      * @param  \App\PermohonanCuti  $permohonanCuti
      * @return \Illuminate\Http\Response
      */
-    public function destroy($cuti)
+    public function destroy($id)
     {
-        $cuti = Cuti::find($cuti);
+        $cuti = Cuti::find($id);
         $cuti->delete();
+
+        Riwayat::create([
+            'id' => Auth::user()->id,
+            'nama' => Auth::user()->name,
+            'level' => Auth::user()->level,
+            'aktivitas' => 'Menghapus Permohonan Cuti  '.$cuti->name.''
+        ]);
         return redirect('permohonan_cuti');
     }
 }

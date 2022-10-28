@@ -79,7 +79,7 @@ class ManajemenUserController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required',
-            'level' => 'required',
+
 
         ]);
 
@@ -88,7 +88,7 @@ class ManajemenUserController extends Controller
         $users->name=$request->get('name');
         $users->email=$request->get('email');
         $users->level=$request->get('level');
-
+        $users->karyawan_id=$request->get('karyawan_id');
 
         $users->save();
         return redirect('manajemen_user');

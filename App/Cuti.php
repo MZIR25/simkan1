@@ -11,6 +11,7 @@ class Cuti extends Model
     protected $fillable = [
        'cuti_id',
        'Alasan_Cuti',
+       'Status',
        'Tanggal_Mulai',
        'Tanggal_Selesai',
        'Alamat',

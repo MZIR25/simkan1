@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
+use App\Riwayat;
+use Illuminate\Support\Facades\Auth;
 
 class JobdeskController extends Controller
 {
@@ -53,6 +55,12 @@ class JobdeskController extends Controller
             'Jam_Mulai'=> 'required',
             'Jam_Selesai'=> 'required',
             'Tugas_Karyawan'=> 'required'
+        ]);
+        Riwayat::create([
+            'id' => Auth::user()->id,
+            'nama' => Auth::user()->name,
+            'level' => Auth::user()->level,
+            'aktivitas' => 'Mengunggah Tugas Karyawan  '.$request->name.''
         ]);
         $jobdesk=new Jobdesk;
 
@@ -105,6 +113,12 @@ class JobdeskController extends Controller
             'Jam_Selesai'=> 'required',
             'Tugas_Karyawan'=> 'required',
         ]);
+        Riwayat::create([
+            'id' => Auth::user()->id,
+            'nama' => Auth::user()->name,
+            'level' => Auth::user()->level,
+            'aktivitas' => 'Mengubah Tugas Karyawan  '.$request->name.''
+        ]);
         $jobdesk= Jobdesk::find($jobdesk_id);
 
         $jobdesk->karyawan_id=$request->get('karyawan_id');
@@ -126,6 +140,12 @@ class JobdeskController extends Controller
     {
         $jobdesk = Jobdesk::find($jobdesk);
         $jobdesk->delete();
+        Riwayat::create([
+            'id' => Auth::user()->id,
+            'nama' => Auth::user()->name,
+            'level' => Auth::user()->level,
+            'aktivitas' => 'Menghapus Tugas Karyawan  '.$jobdesk->name.''
+        ]);
         return redirect('daftar_jobdesk');
     }
 }

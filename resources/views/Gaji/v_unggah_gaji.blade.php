@@ -41,12 +41,12 @@
                     <div class="col-sm-10">
                         <select id="karyawan_id" name="Nama_Jabatan" class="form-control">
 
-                             
+
                             @foreach ($karyawan as $k)
                                 <option value="{{$k->karyawan_id}}">{{$k->Jabatan->Nama_Jabatan}}</option>
-                                
+
                             @endforeach
-                            
+
                         </select>
                     </div>
                     <x-validate-error-message name="Jabatan"/>
@@ -59,10 +59,10 @@
                             <x-validate-error-message name="Gaji_Pokok"/>
                     </div>
                 </div>
-                            
+
 
 <!-- bagian Status Nikah -->
-                <div class="form-group row">
+                {{-- <div class="form-group row">
                     <label for="disabledSelect" class="col-sm-2 col-form-label">Status Menikah</label>
                     <div class="col-sm-10">
                     <select id="disabledSelect" name="Status_Menikah" class="form-control">
@@ -72,8 +72,8 @@
                     </select>
                     </div>
                 </div>
-                <x-validate-error-message name="Status_Menikah"/>
-<!-- bagian Alamat --> 
+                <x-validate-error-message name="Status_Menikah"/> --}}
+<!-- bagian Alamat -->
                 <div class="form-group row">
                     <label for="Pajak_Bpjs" class="col-sm-2 col-form-label">Pajak Bpjs</label>
                     <div class="col-sm-10">
@@ -81,7 +81,7 @@
                             <x-validate-error-message name="Pajak_Bpjs"/>
                     </div>
                 </div>
-<!-- bagian Alamat -->  
+<!-- bagian Alamat -->
                 <div class="form-group row">
                     <label for="Jumlah_Gaji" class="col-sm-2 col-form-label">Jumlah Gaji</label>
                     <div class="col-sm-10">
